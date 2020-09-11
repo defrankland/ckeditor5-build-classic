@@ -12,11 +12,12 @@ import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapte
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
-import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import Image from '@ckeditor/ckeditor5-image/src/image';
+import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
@@ -41,11 +42,12 @@ ClassicEditor.builtinPlugins = [
 	Autoformat,
 	Bold,
 	Italic,
+	Underline,
 	BlockQuote,
 	CKFinder,
-	EasyImage,
 	Heading,
 	Image,
+	ImageResize,
 	ImageCaption,
 	ImageStyle,
 	ImageToolbar,
@@ -69,6 +71,7 @@ ClassicEditor.defaultConfig = {
 			'|',
 			'bold',
 			'italic',
+			'underline',
 			'link',
 			'bulletedList',
 			'numberedList',
@@ -86,9 +89,34 @@ ClassicEditor.defaultConfig = {
 		]
 	},
 	image: {
+		// Configure the available styles.
+		styles: [
+			'alignLeft', 'alignCenter', 'alignRight'
+		],
+
+		// Configure the available image resize options.
+		resizeOptions: [
+			{
+				name: 'imageResize:original',
+				label: 'Original',
+				value: null
+			},
+			{
+				name: 'imageResize:50',
+				label: '50%',
+				value: '50'
+			},
+			{
+				name: 'imageResize:75',
+				label: '75%',
+				value: '75'
+			}
+		],
+
+		// You need to configure the image toolbar, too, so it shows the new style
+		// buttons as well as the resize buttons.
 		toolbar: [
-			'imageStyle:full',
-			'imageStyle:side',
+			'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
 			'|',
 			'imageTextAlternative'
 		]
